@@ -32,13 +32,12 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.support.appcompat
     implementation deps.support.design
+    implementation deps.support.v4
     implementation deps.constraint_layout
     implementation deps.corektx
-    implementation deps.multidex
     implementation deps.banner
 
     implementation deps.glide.runtime
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     annotationProcessor deps.glide.compiler
 
     implementation deps.lifecycle.runtime

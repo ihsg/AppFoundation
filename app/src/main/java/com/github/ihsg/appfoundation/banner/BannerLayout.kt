@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.ihsg.appfoundation.R
+import com.github.ihsg.appfoundation.common.base.BaseFragment
 import kotlinx.android.synthetic.main.sub_banner_layout.view.*
 
 class BannerLayout : ConstraintLayout {
@@ -20,9 +20,9 @@ class BannerLayout : ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.sub_banner_layout, this)
     }
 
-    fun update(fragment: Fragment) {
+    fun update(fragment: BaseFragment) {
         val viewModel: BannerVM = ViewModelProviders.of(fragment).get(BannerVM::class.java)
-        viewModel.load()?.observe(fragment, Observer {
+        viewModel.load(fragment)?.observe(fragment, Observer {
             this.bannerView.startAction(
                 this.progressBar,
                 it

@@ -8,7 +8,7 @@ internal object ParamsInterceptor {
             val request = chain.request()
 
             val newBuilder = request.newBuilder()
-            val userAgent: String = ""
+            val userAgent = ""
             newBuilder.addHeader("User-Agent", userAgent)
 
             newBuilder.build()
