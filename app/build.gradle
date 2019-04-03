@@ -36,6 +36,7 @@ dependencies {
     implementation deps.constraint_layout
     implementation deps.corektx
     implementation deps.banner
+    implementation deps.logger
 
     implementation deps.glide.runtime
     annotationProcessor deps.glide.compiler
