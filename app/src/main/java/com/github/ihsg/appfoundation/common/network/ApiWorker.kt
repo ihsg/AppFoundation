@@ -8,10 +8,8 @@ import retrofit2.Retrofit
 class ApiWorker {
 
     companion object {
-        val instance: ApiWorker =
-            ApiWorker.SingletonHolder.INSTANCE
+        val instance: ApiWorker = ApiWorker.SingletonHolder.INSTANCE
     }
-
 
     private var configuration: Configuration
     private var okHttpClient: OkHttpClient
@@ -26,18 +24,13 @@ class ApiWorker {
     }
 
     init {
-        this.isDeveloping = AppConfiguration.isDeveloping()
+        isDeveloping = AppConfiguration.isDeveloping()
         loggingInterceptor = getLoggingInterceptor()
-        paramsInterceptor =
-            getParamsInterceptor()
-        baseUrl =
-            getBaseUrl()
-        configuration =
-            getConfiguration()
-        okHttpClient =
-            getOkHttpClient()
-        retrofit =
-            getRetrofit()
+        paramsInterceptor = getParamsInterceptor(AppConfiguration.getApiHeaders())
+        baseUrl = getBaseUrl()
+        configuration = getConfiguration()
+        okHttpClient = getOkHttpClient()
+        retrofit = getRetrofit()
     }
 
     fun <T> getApi(apiClass: Class<T>): T {
@@ -71,8 +64,8 @@ class ApiWorker {
         return LoggingInterceptor.create(isDeveloping)
     }
 
-    private fun getParamsInterceptor(): Interceptor {
-        return ParamsInterceptor.create()
+    private fun getParamsInterceptor(apiHeaders: ApiHeaders): Interceptor {
+        return ParamsInterceptor.create(apiHeaders)
     }
 
     private fun getBaseUrl(): BaseUrl {

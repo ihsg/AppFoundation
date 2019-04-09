@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.ihsg.appfoundation.R
 import com.github.ihsg.appfoundation.common.base.BaseFragment
+import com.github.ihsg.appfoundation.common.config.ApiHeaderBuilder
+import com.github.ihsg.appfoundation.common.util.LogUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -21,5 +23,8 @@ class HomeFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
         this.bannerLayout.update(this)
+        this.btnTest.setOnClickListener {
+            LogUtil.d(ApiHeaderBuilder.getRspHeaders()[0].value)
+        }
     }
 }

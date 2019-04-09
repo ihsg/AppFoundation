@@ -1,8 +1,9 @@
 package com.github.ihsg.appfoundation.common.config
 
+import com.github.ihsg.appfoundation.common.network.ApiHeaders
 import com.github.ihsg.appfoundation.common.network.BaseUrl
 
-object AppConfiguration {
+internal object AppConfiguration {
     private const val API_DEFAULT_TIMEOUT: Long = 25L
 
     fun isDeveloping(): Boolean {
@@ -27,5 +28,9 @@ object AppConfiguration {
 
     fun getProductBaseUrl(): BaseUrl {
         return ProductBaseUrl
+    }
+
+    fun getApiHeaders(): ApiHeaders {
+        return ApiHeaderBuilder
     }
 }
