@@ -1,6 +1,6 @@
-package com.github.ihsg.appfoundation.common.config
+package com.github.ihsg.appfoundation.common.config.net
 
-import com.github.ihsg.appfoundation.common.network.BaseUrl
+import com.github.ihsg.appfoundation.common.net.BaseUrl
 
 internal object DevBaseUrl : BaseUrl {
     override val apiBaseUrl: String = ""

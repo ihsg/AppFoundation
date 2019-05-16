@@ -2,6 +2,7 @@ package com.github.ihsg.appfoundation.common.exts
 
 import android.widget.Toast
 import com.github.ihsg.appfoundation.App
+import com.github.ihsg.appfoundation.common.config.AppConfig
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -18,5 +19,9 @@ fun Throwable.handle(isShow: Boolean = true) {
 
     if (isShow) {
         Toast.makeText(App.context, errMsg, Toast.LENGTH_LONG).show()
+    }
+
+    if (AppConfig.isDevMode()) {
+        this.printStackTrace()
     }
 }

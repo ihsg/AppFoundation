@@ -1,4 +1,4 @@
-package com.github.ihsg.appfoundation.common.network
+package com.github.ihsg.appfoundation.common.net
 
 import okhttp3.Interceptor
 
@@ -9,7 +9,7 @@ internal object ParamsInterceptor {
             val request = chain.request()
             val newBuilder = request.newBuilder()
 
-            val reqHeaders = apiHeaders.getReqHeaders()
+            val reqHeaders = apiHeaders.buildRequestHeaders()
             for (header: ApiHeaderBean in reqHeaders) {
                 newBuilder.addHeader(header.name, header.value)
             }
@@ -19,10 +19,11 @@ internal object ParamsInterceptor {
             // response
             val response = chain.proceed(request)
 
-            val rspHeaders = apiHeaders.getRspHeaders()
+            val rspHeaders = apiHeaders.buildRspHeaders()
             for (header: ApiHeaderBean in rspHeaders) {
                 header.value = response.header(header.name) ?: ""
             }
+
             response
         }
     }

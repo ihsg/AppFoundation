@@ -10,6 +10,14 @@ open class BaseActivity : AppCompatActivity(), BaseViewContract {
         LoadingView(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
     override fun showLoadingView(message: String) {
         this.loadingView.show()
     }

@@ -1,4 +1,4 @@
-package com.github.ihsg.appfoundation.common.network
+package com.github.ihsg.appfoundation.common.net
 
 interface BaseUrl {
     val apiBaseUrl: String

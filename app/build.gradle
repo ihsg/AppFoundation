@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.compile_sdk
@@ -17,10 +18,28 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            //多渠道打包配置
+//            applicationVariants.all {
+//
+//            }
+        }
+        debug {
+            debuggable true
+            applicationIdSuffix 'debug'
         }
     }
+//    productFlavors {
+//        huawei {}
+//        xiaomi {}
+//        tencent {}
+//        c360 {}
+//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,15 +50,27 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
     implementation deps.support.appcompat
+    implementation deps.support.recyclerview
+    implementation deps.support.cardview
     implementation deps.support.design
     implementation deps.support.v4
-    implementation deps.constraint_layout
+    implementation deps.constraint
     implementation deps.corektx
     implementation deps.banner
     implementation deps.logger
 
+    implementation deps.refresh.layout
+    implementation deps.refresh.header
+
     implementation deps.glide.runtime
     annotationProcessor deps.glide.compiler
+
+    implementation deps.butterknife.runtime
+    annotationProcessor deps.butterknife.compiler
+
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
+    kapt deps.room.compiler
 
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
@@ -47,6 +78,8 @@ dependencies {
 
     implementation deps.rx.java
     implementation deps.rx.android
+    implementation deps.rx.kotlin
+    implementation deps.rx.permissions
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.retrofit.adapter
@@ -54,7 +87,12 @@ dependencies {
 
     implementation deps.okhttp.runtime
     implementation deps.okhttp.logging
+    implementation deps.okhttp.io
 
+    implementation deps.umeng.analytics
+    implementation deps.umeng.common
+
+    debugImplementation deps.leakcanary
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.espresso.core

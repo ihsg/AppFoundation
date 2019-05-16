@@ -5,7 +5,6 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 
 interface BannerApi {
-
     @GET("banners")
-    fun getBannerList(): Observable<ListBean<BannerBean>>
+    fun getBannerList(): Observable<ListBean<BannerEntity>>
 }

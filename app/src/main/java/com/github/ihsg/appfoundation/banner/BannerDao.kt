@@ -1,0 +1,25 @@
+package com.github.ihsg.appfoundation.banner
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import com.github.ihsg.appfoundation.common.config.db.DBTableNames
+
+@Dao
+interface BannerDao {
+    @Query("SELECT * from ${DBTableNames.T_BANNER}")
+    fun loadAll(): List<BannerEntity>
+
+    @Query("SELECT * FROM ${DBTableNames.T_BANNER} WHERE code IN (:type)")
+    fun loadAllByType(type: String): List<BannerEntity>
+
+    @Insert
+    fun insertAll(bannerEntities: List<BannerEntity>)
+
+    @Delete
+    fun deleteAll(bannerEntities: List<BannerEntity>)
+
+    @Delete
+    fun delete(bannerEntity: BannerEntity)
+}

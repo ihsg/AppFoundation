@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
-import com.github.ihsg.appfoundation.common.network.ImageWorker
+import com.github.ihsg.appfoundation.common.net.ImageWorker
 import com.youth.banner.Banner
 import com.youth.banner.loader.ImageLoader
 
@@ -14,7 +14,7 @@ class BannerView : Banner {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
-    fun startAction(progressBar: ProgressBar?, bannerList: List<BannerBean>) {
+    fun startAction(progressBar: ProgressBar?, bannerList: List<BannerEntity>) {
         //1. show loading
         progressBar?.let { it.visibility = View.VISIBLE }
 

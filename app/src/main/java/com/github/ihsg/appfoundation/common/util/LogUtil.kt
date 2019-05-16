@@ -1,6 +1,6 @@
 package com.github.ihsg.appfoundation.common.util
 
-import com.github.ihsg.appfoundation.common.config.AppConfiguration
+import com.github.ihsg.appfoundation.common.config.AppConfig
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -16,7 +16,7 @@ object LogUtil {
         NONE
     }
 
-    private val loggerLevel = if (AppConfiguration.isDeveloping()) LoggerLevel.VERBOSE else LoggerLevel.ERROR
+    private val loggerLevel = if (AppConfig.isDevMode()) LoggerLevel.VERBOSE else LoggerLevel.ERROR
 
     fun init() {
         Logger.addLogAdapter(

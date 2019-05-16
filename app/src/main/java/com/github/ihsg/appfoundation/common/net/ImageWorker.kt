@@ -1,4 +1,4 @@
-package com.github.ihsg.appfoundation.common.network
+package com.github.ihsg.appfoundation.common.net
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -10,18 +10,13 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.ihsg.appfoundation.R
 
-class ImageWorker {
+class ImageWorker private constructor() {
     companion object {
-        val instance: ImageWorker =
-            ImageWorker.SingletonHolder.INSTANCE
+        val instance: ImageWorker by lazy { ImageWorker() }
 
         interface Listener {
             fun onEnd()
         }
-    }
-
-    private object SingletonHolder {
-        internal val INSTANCE = ImageWorker()
     }
 
     fun loadToImageView(context: Context, url: String, imageView: ImageView, listener: Listener) {

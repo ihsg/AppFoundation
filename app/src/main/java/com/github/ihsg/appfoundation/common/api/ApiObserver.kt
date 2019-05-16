@@ -5,16 +5,27 @@ import com.github.ihsg.appfoundation.common.exts.handle
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-abstract class ApiObserver<T>(private val viewContract: BaseViewContract) : Observer<T> {
+abstract class ApiObserver<T>(
+    private val viewContract: BaseViewContract,
+    private val isShowLoading: Boolean = true
+) : Observer<T> {
     override fun onComplete() {
-        viewContract.hideLoadingView()
+        if (this.isShowLoading) {
+            viewContract.hideLoadingView()
+        }
     }
 
     override fun onSubscribe(d: Disposable) {
-        viewContract.showLoadingView()
+        if (this.isShowLoading) {
+            viewContract.showLoadingView()
+        }
+
     }
 
     override fun onError(e: Throwable) {
+        if (this.isShowLoading) {
+            viewContract.hideLoadingView()
+        }
         e.handle()
     }
 }
