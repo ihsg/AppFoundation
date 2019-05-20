@@ -12,22 +12,28 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".paging.page.LoanListActivity">
+        </activity>
+        <activity android:name=".paging.db.StudentListActivity">
+        </activity>
         <activity android:name=".landing.LandingActivity">
         </activity>
-
         <activity android:name=".splash.SplashActivity">
         </activity>
-
-        <activity android:name=".main.MainActivity"
-                  android:launchMode="singleTask">
+        <activity
+                android:name=".main.MainActivity"
+                android:launchMode="singleTask">
         </activity>
 
-        <activity-alias android:name=".launcher" android:targetActivity=".main.MainActivity">
+        <activity-alias
+                android:name=".launcher"
+                android:targetActivity=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity-alias>
-
     </application>
+
 </manifest>

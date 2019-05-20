@@ -22,9 +22,9 @@ class App : Application() {
         initUMeng()
     }
 
-    private fun initUMeng(){
-        val key ="4"
-        val channel ="3"
+    private fun initUMeng() {
+        val key = "4"
+        val channel = "3"
         val deviceType = UMConfigure.DEVICE_TYPE_PHONE
         val pushSecret = ""
 

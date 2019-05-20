@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.github.ihsg.appfoundation.common.api.CodeNameBean
 import com.github.ihsg.appfoundation.common.config.db.DBTableNames
 
-@Entity(tableName = "${DBTableNames.T_BANNER}")
+@Entity(tableName = DBTableNames.T_BANNER)
 data class BannerEntity(
     @ColumnInfo(name = "id")
     @PrimaryKey
