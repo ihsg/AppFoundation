@@ -1,31 +1,21 @@
 package com.github.ihsg.appfoundation.common.api
 
-import com.github.ihsg.appfoundation.common.base.BaseViewContract
+import androidx.lifecycle.MutableLiveData
 import com.github.ihsg.appfoundation.common.exts.handle
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-abstract class ApiObserver<T>(
-    private val viewContract: BaseViewContract? = null,
-    private val isShowLoading: Boolean = true
-) : Observer<T> {
+abstract class ApiObserver<T>(private val loadState: MutableLiveData<LoadState>? = null) : Observer<T> {
     override fun onComplete() {
-        if (this.isShowLoading) {
-            viewContract?.hideLoadingView()
-        }
+        this.loadState?.postValue(LoadState.LOADED)
     }
 
     override fun onSubscribe(d: Disposable) {
-        if (this.isShowLoading) {
-            viewContract?.showLoadingView()
-        }
-
+        this.loadState?.postValue(LoadState.LOADING)
     }
 
     override fun onError(e: Throwable) {
-        if (this.isShowLoading) {
-            viewContract?.hideLoadingView()
-        }
-        e.handle()
+        val error = e.handle()
+        this.loadState?.postValue(LoadState.error(error))
     }
 }

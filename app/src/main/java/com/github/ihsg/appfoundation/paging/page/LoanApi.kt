@@ -1,11 +1,11 @@
 package com.github.ihsg.appfoundation.paging.page
 
-import com.github.ihsg.appfoundation.common.api.ListBean
+import com.github.ihsg.appfoundation.common.api.bean.PagedRspBean
 import io.reactivex.Observable
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface LoanApi {
     @GET("loans")
-    fun getLoanListApi(@Query("offset") offset: Int, @Query("limit") limit: Int): Observable<ListBean<LoanEntity>>
+    fun getLoanListApi(@QueryMap queryMap: Map<String, String>): Observable<PagedRspBean<LoanEntity>>
 }

@@ -8,7 +8,7 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-fun Throwable.handle(isShow: Boolean = true) {
+fun Throwable.handle(isShow: Boolean = true): String {
     val errMsg = when (this) {
         is UnknownHostException -> "网络错误：无法解析服务器地址，请稍后重试。"
         is ConnectException -> "网络错误：无法连接到服务器，请稍后重试。"
@@ -24,4 +24,6 @@ fun Throwable.handle(isShow: Boolean = true) {
     if (AppConfig.isDevMode()) {
         this.printStackTrace()
     }
+
+    return errMsg
 }

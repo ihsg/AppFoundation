@@ -27,14 +27,15 @@ object SysUtil {
     }
 
     fun dpToPx(dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getAppContext().resources.displayMetrics)
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dp, getAppContext().resources.displayMetrics)
     }
 
     fun getAppVersion(): String {
         return getAppContext()
-            .packageManager
-            .getPackageInfo(BuildConfig.APPLICATION_ID, PackageManager.GET_META_DATA)
-            .versionName
+                .packageManager
+                .getPackageInfo(BuildConfig.APPLICATION_ID, PackageManager.GET_META_DATA)
+                .versionName
     }
 
     fun getDeviceInfo(): String {

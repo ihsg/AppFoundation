@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.github.ihsg.appfoundation.common.api.CodeNameBean
+import com.github.ihsg.appfoundation.common.api.bean.CodeNameBean
 import com.github.ihsg.appfoundation.common.config.db.DBTableNames
 
 @Entity(tableName = DBTableNames.T_BANNER)

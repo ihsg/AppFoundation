@@ -3,4 +3,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="menu_search">search</string>
+    <string name="menu_settings">setting</string>
+    <string name="menu_navigation">navigation</string>
+
+    <string name="user_name">User Name</string>
+    <string name="user_password">Password</string>
+    <string name="user_welcome">welcome</string>
+    <string name="user_login">login</string>
 </resources>

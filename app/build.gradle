@@ -53,7 +53,6 @@ dependencies {
     implementation deps.support.recyclerview
     implementation deps.support.cardview
     implementation deps.support.design
-    implementation deps.support.v4
     implementation deps.constraint
     implementation deps.corektx
     implementation deps.banner
@@ -63,9 +62,7 @@ dependencies {
     implementation deps.refresh.header
 
     implementation deps.glide.runtime
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    annotationProcessor deps.glide.compiler
+    kapt deps.glide.compiler
 
     implementation deps.butterknife.runtime
     kapt deps.butterknife.compiler
@@ -79,12 +76,13 @@ dependencies {
 
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
-    annotationProcessor deps.lifecycle.compiler
+    kapt deps.lifecycle.compiler
 
     implementation deps.rx.java
     implementation deps.rx.android
     implementation deps.rx.kotlin
     implementation deps.rx.permissions
+
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.retrofit.adapter
@@ -93,7 +91,6 @@ dependencies {
     implementation deps.okhttp.runtime
     implementation deps.okhttp.logging
     implementation deps.okhttp.io
-
     implementation deps.umeng.analytics
     implementation deps.umeng.common
 

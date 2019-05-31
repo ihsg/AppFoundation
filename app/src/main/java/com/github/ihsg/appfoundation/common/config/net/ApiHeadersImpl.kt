@@ -1,35 +1,39 @@
 package com.github.ihsg.appfoundation.common.config.net
 
-import com.github.ihsg.appfoundation.common.net.ApiHeaderBean
-import com.github.ihsg.appfoundation.common.net.ApiHeaders
-import com.github.ihsg.appfoundation.common.util.LogUtil
+import android.util.ArrayMap
+import com.github.ihsg.appfoundation.common.api.bean.ApiHeaderBean
+import com.github.ihsg.appfoundation.common.api.IApiHeaders
 import com.github.ihsg.appfoundation.common.util.SysUtil
+import kotlin.collections.ArrayList
 
-internal object ApiHeadersImpl : ApiHeaders {
+internal object ApiHeadersImpl : IApiHeaders {
     private val reqHeaders = ArrayList<ApiHeaderBean>()
-    private val rspHeaders = ArrayList<ApiHeaderBean>()
-
+    private val rspHeadersMap = ArrayMap<String, ArrayList<ApiHeaderBean>>()
     private const val STS: String = "X-TIMESTAMP"
-    private val userAgentHeader = getReqUserAgentHeader()
-    private val stsHeader = ApiHeaderBean(STS, "")
+    private val userAgentHeader: ApiHeaderBean by lazy { this.getReqUserAgentHeader() }
+    private val closedHeader by lazy {
+        ApiHeaderBean("Connection", "close")
+    }
+    private val stsHeader by lazy { ApiHeaderBean(STS, "") }
 
     override fun buildRequestHeaders(): ArrayList<ApiHeaderBean> {
-        if (this.rspHeaders.isNotEmpty()) {
-            LogUtil.w("ApiHeadersImpl: sts = ${rspHeaders[0]}")
-        }
         this.reqHeaders.clear()
         this.reqHeaders.add(userAgentHeader)
+        this.reqHeaders.add(closedHeader)
         return this.reqHeaders
     }
 
-    override fun buildRspHeaders(): ArrayList<ApiHeaderBean> {
-        if (this.rspHeaders.isEmpty()) {
-            this.rspHeaders.add(stsHeader)
+    override fun buildRspHeaders(host: String): ArrayList<ApiHeaderBean> {
+        var headers = rspHeadersMap[host]
+        if (headers == null) {
+            headers = ArrayList()
         }
-        return this.rspHeaders
+        if (headers.isEmpty()) {
+            headers.add(stsHeader)
+        }
+        return headers
     }
 
     private fun getReqUserAgentHeader(): ApiHeaderBean =
-        ApiHeaderBean("User-Agent", "Version/${SysUtil.getAppVersion()} ${SysUtil.getDeviceInfo()}")
-
+            ApiHeaderBean("User-Agent", "Version/${SysUtil.getAppVersion()} ${SysUtil.getDeviceInfo()}")
 }

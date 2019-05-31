@@ -25,12 +25,8 @@ class BannerView : Banner {
                     ImageWorker.instance.loadToImageView(
                         context,
                         path,
-                        imageView,
-                        object : ImageWorker.Companion.Listener {
-                            override fun onEnd() {
-                                progressBar?.let { it.visibility = View.GONE }
-                            }
-                        })
+                        imageView, null
+                    )
                 }
             }
         })

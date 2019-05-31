@@ -1,10 +1,6 @@
 package com.github.ihsg.appfoundation.main
 
 import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.github.ihsg.appfoundation.R
@@ -20,14 +16,15 @@ import java.util.concurrent.Executors
 
 
 class HomeFragment : BaseFragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        ButterKnife.bind(this, view)
-        return view
+    override fun getLayoutResId(): Int {
+        return R.layout.fragment_home
+    }
+
+    override fun initialize() {
+        super.initialize()
+        this.contentView?.let {
+            ButterKnife.bind(this, it)
+        }
     }
 
     private val CHEESE_DATA = arrayListOf(
@@ -128,7 +125,6 @@ class HomeFragment : BaseFragment() {
         super.onStart()
         this.bannerLayout.update(this)
         this.btnTest.setOnClickListener {
-            LogUtil.d(ApiHeadersImpl.buildRspHeaders()[0].value)
             Executors.newSingleThreadExecutor().execute {
                 AppConfig.getDBInstance().studentDao().insertAll(
                     CHEESE_DATA.map { StudentEntity(id = 0, name = it) }
@@ -138,12 +134,12 @@ class HomeFragment : BaseFragment() {
     }
 
     @OnClick(R.id.btnPaging)
-    fun onClickPaging(view: View) {
+    fun onClickPaging() {
         StudentListActivity.startAction(activityContext as Context)
     }
 
     @OnClick(R.id.btnPaged)
-    fun onClickPaged(view: View) {
+    fun onClickPaged() {
         LoanListActivity.startAction(activityContext as Context)
     }
 

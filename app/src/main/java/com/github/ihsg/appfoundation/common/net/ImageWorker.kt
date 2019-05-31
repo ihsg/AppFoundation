@@ -3,23 +3,26 @@ package com.github.ihsg.appfoundation.common.net
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.ihsg.appfoundation.R
+import com.github.ihsg.appfoundation.common.api.LoadState
 
 class ImageWorker private constructor() {
     companion object {
         val instance: ImageWorker by lazy { ImageWorker() }
-
-        interface Listener {
-            fun onEnd()
-        }
     }
 
-    fun loadToImageView(context: Context, url: String, imageView: ImageView, listener: Listener) {
+    fun loadToImageView(
+            context: Context,
+            url: String,
+            imageView: ImageView,
+            loadState: MutableLiveData<LoadState>?
+    ) {
         Glide.with(context)
             .load(url)
             .placeholder(R.drawable.bg_banner_placeholder)
@@ -30,7 +33,7 @@ class ImageWorker private constructor() {
                     target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    listener.onEnd()
+                    loadState?.postValue(LoadState.error(e?.message))
                     return false
                 }
 
@@ -41,7 +44,7 @@ class ImageWorker private constructor() {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    listener.onEnd()
+                    loadState?.postValue(LoadState.LOADED)
                     return false
                 }
 

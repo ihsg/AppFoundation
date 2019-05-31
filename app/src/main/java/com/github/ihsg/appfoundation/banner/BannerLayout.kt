@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.ihsg.appfoundation.R
 import com.github.ihsg.appfoundation.common.base.BaseFragment
+import com.github.ihsg.appfoundation.common.util.LogUtil
 import kotlinx.android.synthetic.main.sub_banner_layout.view.*
 
 class BannerLayout : ConstraintLayout {
@@ -22,11 +23,15 @@ class BannerLayout : ConstraintLayout {
 
     fun update(fragment: BaseFragment) {
         val viewModel: BannerVM = ViewModelProviders.of(fragment).get(BannerVM::class.java)
-        viewModel.load(fragment)?.observe(fragment, Observer {
+        viewModel.load()?.observe(fragment, Observer {
             this.bannerView.startAction(
                 this.progressBar,
                 it
             )
+        })
+
+        viewModel.networkState.observe(fragment, Observer {
+            LogUtil.d(it.toString())
         })
     }
 }
