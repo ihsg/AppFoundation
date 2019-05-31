@@ -23,7 +23,7 @@ class PagedDataSource<T>(
     }
 
     override fun loadAfter(params: LoadParams<PagedReqBean>, callback: LoadCallback<PagedReqBean, T>) {
-        this.pagedWorker(params.requestedLoadSize, params.key.limit) { t: PagedRspBean<T> ->
+        this.pagedWorker(params.key.offset, params.requestedLoadSize) { t: PagedRspBean<T> ->
             t.items?.let {
                 callback.onResult(it, nextPagedReqBean)
             }
