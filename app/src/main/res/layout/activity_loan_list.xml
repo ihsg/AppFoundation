@@ -13,11 +13,18 @@
         android:text="refresh"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="retry"
+        app:layout_constraintTop_toBottomOf="@id/btnRefresh" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnRefresh">
+        app:layout_constraintTop_toBottomOf="@id/btnRetry">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

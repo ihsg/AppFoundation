@@ -1,4 +1,4 @@
-package com.github.ihsg.appfoundation.paging.page
+package com.github.ihsg.appfoundation.common.api.paged
 
 import com.github.ihsg.appfoundation.common.api.bean.PagedReqBean
 

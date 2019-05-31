@@ -73,10 +73,15 @@ class LoanListActivity : BaseFullscreenActivity() {
         this.newViewModel.refresh()
     }
 
+    @OnClick(R.id.btnRetry)
+    fun onClickRetry() {
+        this.newViewModel.retry()
+    }
+
     private fun loadLoanList() {
         this.viewModel.getLoanList().observe(this,
-            Observer<PagedList<LoanEntity>> {
-                adapter.submitList(it)
-            })
+                Observer<PagedList<LoanEntity>> {
+                    adapter.submitList(it)
+                })
     }
 }
