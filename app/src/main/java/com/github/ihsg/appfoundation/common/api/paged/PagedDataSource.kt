@@ -44,7 +44,11 @@ class PagedDataSource<T>(
         val pagedCallback = object : IPagedCallback<PagedRspBean<T>> {
             override fun callback(t: PagedRspBean<T>) {
                 // next paged
-                nextPagedReqBean.offset = Math.min(limit, t.count)
+                if (offset == 0) {
+                    nextPagedReqBean.offset = Math.min(limit, t.count)
+                } else {
+                    nextPagedReqBean.offset += Math.min(limit, t.count)
+                }
                 nextPagedReqBean.limit = limit
 
                 // update paged
