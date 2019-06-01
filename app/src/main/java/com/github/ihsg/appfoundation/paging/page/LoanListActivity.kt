@@ -29,9 +29,7 @@ class LoanListActivity : BaseFullscreenActivity() {
 
     private lateinit var viewModel: LoanListVM
     private lateinit var adapter: LoanListAdapter
-
     private lateinit var newViewModel: NewLoanListVM
-
 
     override fun initialize() {
         super.initialize()
@@ -56,7 +54,6 @@ class LoanListActivity : BaseFullscreenActivity() {
                 @Suppress("UNCHECKED_CAST")
                 return NewLoanListVM() as T
             }
-
         })[NewLoanListVM::class.java]
 
         this.newViewModel.loans.observe(this, Observer { adapter.submitList(it) })

@@ -48,29 +48,31 @@ abstract class PagedRepository<T> {
         }
         val sourceFactory = PagedDataSourceFactory(pagedCallWrapper)
         val livePagedList = LivePagedListBuilder(
-                sourceFactory,
-                PagedList.Config.Builder()
-                        .setPageSize(50)
-                        .setEnablePlaceholders(false)
-                        .setPrefetchDistance(50)
-                        .setInitialLoadSizeHint(100)
-                        .build()
+            sourceFactory,
+            PagedList.Config.Builder()
+                .setPageSize(50)
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(50)
+                .setInitialLoadSizeHint(100)
+                .build()
         ).build()
 
         return PagedBean<T>(
-                pagedList = livePagedList,
-                initialState = this.initialState,
-                refreshState = this.refreshState,
-                moreState = this.moreState,
-                refresh = {
-                    loadState = refreshState
-                    sourceFactory.sourceLiveData.value?.invalidate()
-                },
-                retry = { this.retryAllFailed() }
+            pagedList = livePagedList,
+            initialState = this.initialState,
+            refreshState = this.refreshState,
+            moreState = this.moreState,
+            refresh = {
+                loadState = refreshState
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            retry = { this.retryAllFailed() }
         )
     }
 
-    protected abstract fun apiWorker(pagedReqBean: PagedReqBean,
-                                     loadState: MutableLiveData<LoadState>?,
-                                     pagedCallback: IPagedCallback<PagedRspBean<T>>)
+    protected abstract fun apiWorker(
+        pagedReqBean: PagedReqBean,
+        loadState: MutableLiveData<LoadState>?,
+        pagedCallback: IPagedCallback<PagedRspBean<T>>
+    )
 }

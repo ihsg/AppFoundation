@@ -4,17 +4,13 @@ import androidx.paging.PageKeyedDataSource
 import com.github.ihsg.appfoundation.common.api.bean.PagedReqBean
 import com.github.ihsg.appfoundation.common.api.bean.PagedRspBean
 
-class PagedDataSource<T>(
-        private val pagedCallbackWrapper: IPagedCallbackWrapper<PagedRspBean<T>>) :
-        PageKeyedDataSource<PagedReqBean, T>() {
+class PagedDataSource<T>(private val pagedCallbackWrapper: IPagedCallbackWrapper<PagedRspBean<T>>) :
+    PageKeyedDataSource<PagedReqBean, T>() {
 
     private val curPagedReqBean: PagedReqBean = PagedReqBean(0, 10)
     private val nextPagedReqBean: PagedReqBean = PagedReqBean(0, 10)
 
-    override fun loadInitial(
-            params: LoadInitialParams<PagedReqBean>,
-            callback: LoadInitialCallback<PagedReqBean, T>
-    ) {
+    override fun loadInitial(params: LoadInitialParams<PagedReqBean>, callback: LoadInitialCallback<PagedReqBean, T>) {
         this.pagedWorker(0, params.requestedLoadSize) { t: PagedRspBean<T> ->
             t.items?.let {
                 callback.onResult(it, curPagedReqBean, nextPagedReqBean)
@@ -31,7 +27,7 @@ class PagedDataSource<T>(
     }
 
     override fun loadBefore(params: LoadParams<PagedReqBean>, callback: LoadCallback<PagedReqBean, T>) {
-        //nothing to do...
+        // nothing to do...
     }
 
 
