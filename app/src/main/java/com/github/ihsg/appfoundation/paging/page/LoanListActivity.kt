@@ -2,7 +2,9 @@ package com.github.ihsg.appfoundation.paging.page
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,12 +16,10 @@ import butterknife.OnClick
 import com.github.ihsg.appfoundation.R
 import com.github.ihsg.appfoundation.common.base.BaseFullscreenActivity
 import com.github.ihsg.appfoundation.common.util.LogUtil
+import com.github.ihsg.appfoundation.databinding.ActivityLoanListBinding
 import kotlinx.android.synthetic.main.activity_loan_list.*
 
-class LoanListActivity : BaseFullscreenActivity() {
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_loan_list
-    }
+class LoanListActivity : AppCompatActivity() {
 
     companion object {
         fun startAction(context: Context) {
@@ -27,27 +27,13 @@ class LoanListActivity : BaseFullscreenActivity() {
         }
     }
 
-    private lateinit var viewModel: LoanListVM
-    private lateinit var adapter: LoanListAdapter
-    private lateinit var newViewModel: NewLoanListVM
-
-    override fun initialize() {
-        super.initialize()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val d = DataBindingUtil.setContentView<ActivityLoanListBinding>(this, R.layout.activity_loan_list)
+        d.lifecycleOwner = this
+        d.layoutMgr = LinearLayoutManager(this)
+        d.adapter = this.adapter
         ButterKnife.bind(this)
-
-        this.adapter = LoanListAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = this.adapter
-
-//        this.viewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-//            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//                @Suppress("UNCHECKED_CAST")
-//                return LoanListVM() as T
-//            }
-//
-//        })[LoanListVM::class.java]
-//
-//        loadLoanList()
 
         this.newViewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -61,6 +47,10 @@ class LoanListActivity : BaseFullscreenActivity() {
         this.newViewModel.refreshState.observe(this, Observer { LogUtil.v("refresh: ${it.status.name}") })
         this.newViewModel.moreState.observe(this, Observer { LogUtil.v("more: ${it.status.name}") })
     }
+
+    private lateinit var viewModel: LoanListVM
+    private val adapter: LoanListAdapter by lazy { LoanListAdapter() }
+    private lateinit var newViewModel: NewLoanListVM
 
     @OnClick(R.id.btnRefresh)
     fun onClickRefresh() {

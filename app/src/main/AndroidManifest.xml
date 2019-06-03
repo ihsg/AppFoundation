@@ -29,7 +29,7 @@
 
         <activity-alias
             android:name=".launcher"
-            android:targetActivity=".sign.LoginActivity">
+            android:targetActivity=".paging.page.LoanListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
