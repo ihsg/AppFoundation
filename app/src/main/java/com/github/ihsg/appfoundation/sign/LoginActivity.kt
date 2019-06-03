@@ -1,26 +1,22 @@
 package com.github.ihsg.appfoundation.sign
 
-import butterknife.ButterKnife
-import butterknife.OnClick
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.github.ihsg.appfoundation.R
-import com.github.ihsg.appfoundation.common.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_login.*
+import com.github.ihsg.appfoundation.databinding.ActivityLoginBinding
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : AppCompatActivity() {
     private var toggle = false
-
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_login
+    private val viewModel: LoginVM by lazy {
+        ViewModelProviders.of(this).get(LoginVM::class.java)
     }
 
-    override fun initialize() {
-        super.initialize()
-        ButterKnife.bind(this)
-    }
-
-    @OnClick(R.id.btnLogin)
-    fun onClickLogin() {
-        this.toggle = !this.toggle
-        this.passwordWrapper.error = if (this.toggle) "error" else null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
+        binding.lifecycleOwner = this
+        binding.vm = viewModel
     }
 }

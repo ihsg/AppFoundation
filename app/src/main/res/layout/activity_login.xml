@@ -1,74 +1,85 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    tools:context="com.github.ihsg.appfoundation.sign.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!--welcome-->
-    <TextView
-        android:id="@+id/textWelcome"
+    <data>
+
+        <variable
+            name="vm"
+            type="com.github.ihsg.appfoundation.sign.LoginVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="40dp"
-        android:paddingBottom="40dp"
-        android:text="@string/user_welcome"
-        android:textColor="#313131"
-        android:textSize="45sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        tools:context="com.github.ihsg.appfoundation.sign.LoginActivity">
 
-    <!--username-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textWelcome">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+        <!--welcome-->
+        <TextView
+            android:id="@+id/textWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_name" />
+            android:paddingTop="40dp"
+            android:paddingBottom="40dp"
+            android:text="@{vm.textWelcome}"
+            android:textColor="#313131"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!--password-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernameWrapper"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPassword"
+        <!--username-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_password"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textWelcome">
 
-    <!--action-->
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/user_login"
-        android:textColor="#fff"
-        app:layout_constraintTop_toBottomOf="@id/passwordWrapper" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_name" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/bg_banner_placeholder"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!--password-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/usernameWrapper"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--action-->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:onClick="@{()->vm.onSubmit()}"
+            android:text="@string/user_login"
+            android:textColor="#fff"
+            app:layout_constraintTop_toBottomOf="@id/passwordWrapper" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_banner_placeholder"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
