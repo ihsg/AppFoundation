@@ -43,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/user_name" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--password-->
@@ -78,8 +77,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/bg_banner_placeholder"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+            app:imageUrl="@{vm.imageUrl}"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin"
+            android:contentDescription="@string/app_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
