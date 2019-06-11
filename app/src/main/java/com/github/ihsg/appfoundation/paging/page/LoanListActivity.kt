@@ -3,7 +3,6 @@ package com.github.ihsg.appfoundation.paging.page
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -14,18 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.github.ihsg.appfoundation.R
-import com.github.ihsg.appfoundation.common.base.BaseFullscreenActivity
+import com.github.ihsg.appfoundation.common.base.BaseActivity
 import com.github.ihsg.appfoundation.common.util.LogUtil
 import com.github.ihsg.appfoundation.databinding.ActivityLoanListBinding
-import kotlinx.android.synthetic.main.activity_loan_list.*
 
-class LoanListActivity : AppCompatActivity() {
-
+class LoanListActivity : BaseActivity() {
     companion object {
         fun startAction(context: Context) {
             context.startActivity(Intent(context, LoanListActivity::class.java))
         }
     }
+
+    private lateinit var viewModel: LoanListVM
+    private val adapter: LoanListAdapter by lazy { LoanListAdapter() }
+    private lateinit var newViewModel: NewLoanListVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +48,6 @@ class LoanListActivity : AppCompatActivity() {
         this.newViewModel.refreshState.observe(this, Observer { LogUtil.v("refresh: ${it.status.name}") })
         this.newViewModel.moreState.observe(this, Observer { LogUtil.v("more: ${it.status.name}") })
     }
-
-    private lateinit var viewModel: LoanListVM
-    private val adapter: LoanListAdapter by lazy { LoanListAdapter() }
-    private lateinit var newViewModel: NewLoanListVM
 
     @OnClick(R.id.btnRefresh)
     fun onClickRefresh() {

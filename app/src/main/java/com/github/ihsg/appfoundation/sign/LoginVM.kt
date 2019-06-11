@@ -11,7 +11,7 @@ class LoginVM : ViewModel() {
     val inputUserName = MutableLiveData<String>()
 
     fun onSubmit() {
-        this.textWelcome.postValue("Welcome ${++a}")
+        this.textWelcome.value = "Welcome ${++a}"
         this.imageUrl.postValue("https://www.lvjinsuo.com/static/images/app/banner/depository_banner.png")
         LogUtil.i("input user name: ${inputUserName.value}")
     }
